@@ -13,7 +13,7 @@ importers:
       '@aws-sdk/client-s3':
         specifier: ^3.700.0
         version: 3.1035.0
-      '@endless-canvas/config':
+      '@openflipbook/config':
         specifier: workspace:*
         version: link:../../packages/config
       mongodb:
