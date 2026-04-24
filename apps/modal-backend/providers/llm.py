@@ -13,7 +13,7 @@ from typing import Any
 
 from openai import AsyncOpenAI
 
-LLAMACPP_BASE_URL = os.environ.get("LLAMACPP_BASE_URL", "http://localhost:8080/v1")
+LLAMACPP_BASE_URL = os.environ.get("LLAMACPP_BASE_URL", "http://localhost:28081/v1")
 DEFAULT_VLM_MODEL = os.environ.get("LLAMACPP_VLM_MODEL", "qwen2.5-vl-7b")
 DEFAULT_TEXT_MODEL = os.environ.get("LLAMACPP_TEXT_MODEL", "qwen2.5-7b")
 
