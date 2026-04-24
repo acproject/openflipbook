@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1aab6ba0-9733-4545-87f3-c7a30fae96fe",
+    "parent_id": null,
+    "session_id": "session_27d84178-eddb-4ae6-a14e-3165d6a67821",
+    "query": "Uploaded image",
+    "page_title": "Uploaded image",
+    "image_key": "session_27d84178-eddb-4ae6-a14e-3165d6a67821/26c18f61-e8cc-4504-8059-f97fbc316908.png",
+    "image_model": "user-upload",
+    "prompt_author_model": "user-upload",
+    "aspect_ratio": "16:9",
+    "final_prompt": "",
+    "created_at": "2026-04-24T06:15:21.257Z"
+  },
+  {
+    "id": "3fc78711-ebc5-4ea5-9ed6-d08cafe37f1c",
+    "parent_id": null,
+    "session_id": "session_9b0fd327-4584-48fb-947e-6bbc31bbf1cf",
+    "query": "Uploaded image",
+    "page_title": "Uploaded image",
+    "image_key": "session_9b0fd327-4584-48fb-947e-6bbc31bbf1cf/c9da4824-f78e-4665-8b9f-ce28310e8012.png",
+    "image_model": "user-upload",
+    "prompt_author_model": "user-upload",
+    "aspect_ratio": "16:9",
+    "final_prompt": "",
+    "created_at": "2026-04-24T06:26:47.175Z"
+  },
+  {
+    "id": "f82e72ea-373c-4f3c-b5a5-ccd076fb5d5c",
+    "parent_id": null,
+    "session_id": "session_9995d8d2-6a49-4306-84e0-f5bd78eca7a0",
+    "query": "Uploaded image",
+    "page_title": "Uploaded image",
+    "image_key": "session_9995d8d2-6a49-4306-84e0-f5bd78eca7a0/851352a3-3b2f-4084-a891-4dc8d7184f5f.jpg",
+    "image_model": "user-upload",
+    "prompt_author_model": "user-upload",
+    "aspect_ratio": "16:9",
+    "final_prompt": "",
+    "created_at": "2026-04-24T06:48:04.817Z"
+  },
+  {
+    "id": "c0abcf25-2dfc-49de-9b93-0e16ac25ca64",
+    "parent_id": "f82e72ea-373c-4f3c-b5a5-ccd076fb5d5c",
+    "session_id": "session_9995d8d2-6a49-4306-84e0-f5bd78eca7a0",
+    "query": "Uploaded image",
+    "page_title": "The Rabbit's Face",
+    "image_key": "session_9995d8d2-6a49-4306-84e0-f5bd78eca7a0/45d54dd7-53e6-42c3-b6b3-d871b3c0ebfa.jpg",
+    "image_model": "05Xxmix9realisticV4005_v10.safetensors",
+    "prompt_author_model": "qwen2.5-7b",
+    "aspect_ratio": "16:9",
+    "final_prompt": "Illustration of a rabbit's face viewed from the front, with detailed features labeled: two long white ears, a rounded snout with two black nostrils, small dark eyes, and a short pink nose. The layout hints suggest a symmetrical design with annotations pointing to each facial feature for educational clarity.\n\nLabels to include:\n- The rabbit has two long, upright ears.\n- The snout is rounded with two small black nostrils.\n- Two dark, round eyes are located on the sides of the face.\n- The nose is a small pink circle.\n- The rabbit's face is symmetrical.\n- The image is designed to be educational and visually appealing.",
+    "created_at": "2026-04-24T06:52:16.160Z"
+  },
+  {
+    "id": "06bfc59a-55c8-43a6-b04a-274380fb7ab6",
+    "parent_id": "c0abcf25-2dfc-49de-9b93-0e16ac25ca64",
+    "session_id": "session_9995d8d2-6a49-4306-84e0-f5bd78eca7a0",
+    "query": "Uploaded image",
+    "page_title": "Rabbit Ears Illustration",
+    "image_key": "session_9995d8d2-6a49-4306-84e0-f5bd78eca7a0/56418733-4746-4370-a902-d878cfc1f435.jpg",
+    "image_model": "05Xxmix9realisticV4005_v10.safetensors",
+    "prompt_author_model": "qwen2.5-7b",
+    "aspect_ratio": "16:9",
+    "final_prompt": "A charming illustration of a rabbit's head, featuring large, perky ears. The rabbit is facing forward, with its ears prominently displayed, showcasing their size and shape. Labels annotate the ears as 'Rabbit Ears,' with annotations noting their soft texture and the position on the rabbit's head. The layout is clean, with a white background to emphasize the rabbit's head and ears, designed for readability at 1280x720.\n\nLabels to include:\n- The rabbit's ears are large and have a soft texture.\n- Rabbit ears are typically pointed and stand upright.\n- Ears are a key identifier for rabbits.\n- The illustration is designed for educational or decorative purposes.\n- Rabbit ears help in temperature regulation and hearing.",
+    "created_at": "2026-04-24T07:21:22.463Z"
+  }
+]

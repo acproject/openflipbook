@@ -1,8 +1,7 @@
-"""OpenRouter-backed LLM/VLM client.
+"""Local LLM/VLM client using llama.cpp server.
 
-Uses the openai SDK pointed at https://openrouter.ai/api/v1. Models are
-configurable via env; defaults are Qwen 2.5 VL/text (cheap, strong).
-Web search uses OpenRouter's `:online` suffix (Exa-backed) — no extra key.
+Uses the OpenAI-compatible API from llama.cpp server.
+Point LLAMACPP_BASE_URL to your llama.cpp server (default: http://localhost:8080).
 """
 
 from __future__ import annotations
@@ -14,9 +13,9 @@ from typing import Any
 
 from openai import AsyncOpenAI
 
-OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-DEFAULT_VLM_MODEL = "qwen/qwen-2.5-vl-72b-instruct"
-DEFAULT_TEXT_MODEL = "qwen/qwen-2.5-72b-instruct"
+LLAMACPP_BASE_URL = os.environ.get("LLAMACPP_BASE_URL", "http://localhost:8080/v1")
+DEFAULT_VLM_MODEL = os.environ.get("LLAMACPP_VLM_MODEL", "qwen2.5-vl-7b")
+DEFAULT_TEXT_MODEL = os.environ.get("LLAMACPP_TEXT_MODEL", "qwen2.5-7b")
 
 
 @dataclass
@@ -27,34 +26,18 @@ class PagePlan:
 
 
 def _client() -> AsyncOpenAI:
-    api_key = os.environ.get("OPENROUTER_API_KEY")
-    if not api_key:
-        raise RuntimeError("OPENROUTER_API_KEY is not set")
     return AsyncOpenAI(
-        api_key=api_key,
-        base_url=OPENROUTER_BASE_URL,
-        default_headers={
-            "HTTP-Referer": os.environ.get(
-                "OPENROUTER_REFERER", "https://github.com/eren23/openflipbook"
-            ),
-            "X-Title": "Endless Canvas",
-        },
+        api_key=os.environ.get("LLAMACPP_API_KEY", "not-needed"),
+        base_url=LLAMACPP_BASE_URL,
     )
 
 
 def _vlm_model() -> str:
-    return os.environ.get("OPENROUTER_VLM_MODEL", DEFAULT_VLM_MODEL)
+    return DEFAULT_VLM_MODEL
 
 
 def _text_model(online: bool) -> str:
-    base = os.environ.get("OPENROUTER_TEXT_MODEL", DEFAULT_TEXT_MODEL)
-    if online and os.environ.get("OPENROUTER_ENABLE_WEB_SEARCH", "true").lower() in (
-        "1",
-        "true",
-        "yes",
-    ):
-        return f"{base}:online"
-    return base
+    return DEFAULT_TEXT_MODEL
 
 
 async def click_to_subject(
