@@ -39,3 +39,4 @@ ec-*.png
 # Demo recorder intermediates
 scripts/record-demo/artifacts/
 scripts/record-demo/node_modules/
+data

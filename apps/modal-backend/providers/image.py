@@ -83,6 +83,8 @@ async def _generate_comfyui(prompt: str, width: int, height: int) -> GeneratedIm
     import json
     import uuid
     import time
+    import asyncio
+    import requests
     
     model_name = os.environ.get("COMFYUI_MODEL", "05Xxmix9realisticV4005_v10.safetensors")
     
@@ -112,42 +114,56 @@ async def _generate_comfyui(prompt: str, width: int, height: int) -> GeneratedIm
     
     client_id = str(uuid.uuid4())
     
-    async with httpx.AsyncClient(timeout=180.0) as client:
-        resp = await client.post(
+    def post_prompt():
+        return requests.post(
             f"{LOCAL_IMAGE_API_URL}/prompt",
             json={"prompt": workflow, "client_id": client_id},
+            timeout=30,
         )
-        resp.raise_for_status()
-        prompt_data = resp.json()
-        prompt_id = prompt_data.get("prompt_id")
-        
-        if not prompt_id:
-            raise RuntimeError(f"ComfyUI did not return prompt_id: {prompt_data}")
-        
-        for _ in range(180):
-            await client.get(f"{LOCAL_IMAGE_API_URL}/history/{prompt_id}")
-            history_resp = await client.get(f"{LOCAL_IMAGE_API_URL}/history/{prompt_id}")
-            if history_resp.status_code == 200:
-                history = history_resp.json()
-                if prompt_id in history:
-                    node_output = history[prompt_id].get("outputs", {}).get("9", {})
-                    images = node_output.get("images", [])
-                    if images:
-                        output = images[0]
-                        img_resp = await client.get(
-                            f"{LOCAL_IMAGE_API_URL}/view",
-                            params={"filename": output["filename"], "subfolder": output.get("subfolder", ""), "type": output.get("type", "output")},
-                        )
-                        img_resp.raise_for_status()
-                        return GeneratedImage(
-                            jpeg_bytes=img_resp.content,
-                            mime_type="image/jpeg",
-                            model=model_name,
-                            provider_request_id=prompt_id,
-                        )
-            time.sleep(1)
-        
-        raise RuntimeError("ComfyUI image generation timed out")
+    
+    resp = await asyncio.to_thread(post_prompt)
+    resp.raise_for_status()
+    prompt_data = resp.json()
+    prompt_id = prompt_data.get("prompt_id")
+    
+    if not prompt_id:
+        raise RuntimeError(f"ComfyUI did not return prompt_id: {prompt_data}")
+    
+    def get_history():
+        return requests.get(f"{LOCAL_IMAGE_API_URL}/history/{prompt_id}", timeout=10)
+    
+    def get_view(filename, subfolder, type_):
+        return requests.get(
+            f"{LOCAL_IMAGE_API_URL}/view",
+            params={"filename": filename, "subfolder": subfolder, "type": type_},
+            timeout=30,
+        )
+    
+    for _ in range(180):
+        history_resp = await asyncio.to_thread(get_history)
+        if history_resp.status_code == 200:
+            history = history_resp.json()
+            if prompt_id in history:
+                node_output = history[prompt_id].get("outputs", {}).get("9", {})
+                images = node_output.get("images", [])
+                if images:
+                    output = images[0]
+                    img_resp = await asyncio.to_thread(
+                        get_view,
+                        output["filename"],
+                        output.get("subfolder", ""),
+                        output.get("type", "output"),
+                    )
+                    img_resp.raise_for_status()
+                    return GeneratedImage(
+                        jpeg_bytes=img_resp.content,
+                        mime_type="image/jpeg",
+                        model=model_name,
+                        provider_request_id=prompt_id,
+                    )
+        await asyncio.sleep(1)
+    
+    raise RuntimeError("ComfyUI image generation timed out")
 
 
 def encode_data_url(jpeg_bytes: bytes, mime_type: str = "image/jpeg") -> str:
