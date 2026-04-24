@@ -63,5 +63,18 @@
     "aspect_ratio": "16:9",
     "final_prompt": "A charming illustration of a rabbit's head, featuring large, perky ears. The rabbit is facing forward, with its ears prominently displayed, showcasing their size and shape. Labels annotate the ears as 'Rabbit Ears,' with annotations noting their soft texture and the position on the rabbit's head. The layout is clean, with a white background to emphasize the rabbit's head and ears, designed for readability at 1280x720.\n\nLabels to include:\n- The rabbit's ears are large and have a soft texture.\n- Rabbit ears are typically pointed and stand upright.\n- Ears are a key identifier for rabbits.\n- The illustration is designed for educational or decorative purposes.\n- Rabbit ears help in temperature regulation and hearing.",
     "created_at": "2026-04-24T07:21:22.463Z"
+  },
+  {
+    "id": "657d4822-a458-42a7-9252-fb6b0a1f75c8",
+    "parent_id": null,
+    "session_id": "session_f3815fb2-bcfb-4796-9630-8d8855bd48dc",
+    "query": "Uploaded image",
+    "page_title": "Uploaded image",
+    "image_key": "session_f3815fb2-bcfb-4796-9630-8d8855bd48dc/f20a248a-ac1c-4d27-a21f-ece131f77292.png",
+    "image_model": "user-upload",
+    "prompt_author_model": "user-upload",
+    "aspect_ratio": "16:9",
+    "final_prompt": "",
+    "created_at": "2026-04-24T11:15:38.169Z"
   }
 ]
