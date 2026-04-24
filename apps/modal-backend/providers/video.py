@@ -174,14 +174,13 @@ async def _animate_comfyui(
             },
         },
         "9": {
-            "class_type": "SaveAnimatedWEBP",
+            "class_type": "SaveWEBM",
             "inputs": {
                 "images": ["8", 0],
                 "filename_prefix": "openflipbook_video",
+                "codec": "vp9",
                 "fps": 24,
-                "lossless": False,
-                "quality": 80,
-                "method": "default",
+                "crf": 23.0,
             },
         },
     }
@@ -233,11 +232,11 @@ async def _animate_comfyui(
                     
                     video_bytes = img_resp.content
                     b64_video = base64.b64encode(video_bytes).decode("ascii")
-                    data_url = f"data:image/webp;base64,{b64_video}"
+                    data_url = f"data:video/webm;base64,{b64_video}"
                     
                     return AnimatedClip(
                         video_url=data_url,
-                        content_type="video/webp",
+                        content_type="video/webm",
                         model="comfyui-ltxv",
                         duration_seconds=2.0,
                     )

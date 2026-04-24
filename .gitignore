@@ -41,3 +41,4 @@ scripts/record-demo/artifacts/
 scripts/record-demo/node_modules/
 data
 data\**
+test_output.webm
