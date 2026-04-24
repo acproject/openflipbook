@@ -40,3 +40,4 @@ ec-*.png
 scripts/record-demo/artifacts/
 scripts/record-demo/node_modules/
 data
+data\**

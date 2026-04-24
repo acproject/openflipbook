@@ -9,11 +9,8 @@ from __future__ import annotations
 import json
 import os
 import logging
-import httpx
 from dataclasses import dataclass
 from typing import Any
-
-from openai import AsyncOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -27,19 +24,6 @@ class PagePlan:
     page_title: str
     prompt: str
     facts: list[str]
-
-
-def _client() -> AsyncOpenAI:
-    http_client = httpx.AsyncClient(
-        timeout=120.0,
-        http1=True,
-        http2=False,
-    )
-    return AsyncOpenAI(
-        api_key=os.environ.get("LLAMACPP_API_KEY", "not-needed"),
-        base_url=LLAMACPP_BASE_URL,
-        http_client=http_client,
-    )
 
 
 def _vlm_model() -> str:
