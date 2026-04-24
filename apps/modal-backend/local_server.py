@@ -26,11 +26,18 @@ _root = _here.parent.parent
 load_dotenv(_here / ".env", override=False)
 load_dotenv(_root / ".env", override=False)
 
-for required in ("FAL_KEY", "OPENROUTER_API_KEY"):
-    if not os.environ.get(required):
-        print(
-            f"[local_server] warning: {required} is not set; requests that need it will fail."
-        )
+# Check for local service URLs
+llamacpp_url = os.environ.get("LLAMACPP_BASE_URL")
+local_image_url = os.environ.get("LOCAL_IMAGE_API_URL")
+
+if not llamacpp_url:
+    print(
+        "[local_server] warning: LLAMACPP_BASE_URL is not set; LLM requests will fail."
+    )
+if not local_image_url:
+    print(
+        "[local_server] warning: LOCAL_IMAGE_API_URL is not set; image generation will fail."
+    )
 
 import uvicorn  # noqa: E402
 from generate import fastapi_app  # noqa: E402

@@ -15,7 +15,7 @@ from dataclasses import dataclass
 
 import httpx
 
-LOCAL_IMAGE_API_URL = os.environ.get("LOCAL_IMAGE_API_URL", "http://localhost:7860")
+LOCAL_IMAGE_API_URL = os.environ.get("LOCAL_IMAGE_API_URL", "http://localhost:8188")
 DEFAULT_IMAGE_MODEL = os.environ.get("LOCAL_IMAGE_MODEL", "automatic1111")
 
 

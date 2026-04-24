@@ -10,6 +10,43 @@ interface Row {
 }
 
 function buildRows(env: ReturnType<typeof readServerEnv>): Row[] {
+  const isLocalMode = !env.MONGODB_URI && !env.R2_ACCOUNT_ID;
+  
+  if (isLocalMode) {
+    return [
+      {
+        key: "MODAL_API_URL",
+        required: true,
+        ok: Boolean(env.MODAL_API_URL),
+        hint: "URL pointing to local Python backend (http://localhost:8787).",
+      },
+      {
+        key: "Local Mode",
+        required: true,
+        ok: true,
+        hint: "Using JSON file storage and local image storage.",
+      },
+      {
+        key: "LLAMACPP_BASE_URL",
+        required: true,
+        ok: true,
+        hint: "llama.cpp server URL (configured in backend .env).",
+      },
+      {
+        key: "LOCAL_IMAGE_API_URL",
+        required: true,
+        ok: true,
+        hint: "ComfyUI server URL (configured in backend .env).",
+      },
+      {
+        key: "NEXT_PUBLIC_LTX_WS_URL",
+        required: false,
+        ok: Boolean(process.env.NEXT_PUBLIC_LTX_WS_URL),
+        hint: "Optional: WS URL for streaming video mode.",
+      },
+    ];
+  }
+
   return [
     {
       key: "MODAL_API_URL",

@@ -1,3 +1,15 @@
+export function decodeDataUrl(dataUrl: string): {
+  contentType: string;
+  bytes: Buffer;
+} {
+  const match = /^data:([^;]+);base64,(.*)$/i.exec(dataUrl);
+  if (!match) throw new Error("not a base64 data URL");
+  const contentType = match[1]!;
+  const b64 = match[2]!;
+  return { contentType, bytes: Buffer.from(b64, "base64") };
+}
+
+// R2 storage functions (not used in local mode)
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { readServerEnv, requireR2 } from "./env";
 
@@ -45,15 +57,4 @@ export async function uploadJpeg(
     })
   );
   return { key, url: `${publicBaseUrl}/${key}`, contentType };
-}
-
-export function decodeDataUrl(dataUrl: string): {
-  contentType: string;
-  bytes: Buffer;
-} {
-  const match = /^data:([^;]+);base64,(.*)$/i.exec(dataUrl);
-  if (!match) throw new Error("not a base64 data URL");
-  const contentType = match[1]!;
-  const b64 = match[2]!;
-  return { contentType, bytes: Buffer.from(b64, "base64") };
 }

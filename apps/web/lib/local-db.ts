@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import { readServerEnv } from "./env";
 
 const DATA_DIR = path.join(process.cwd(), "..", "..", "data");
 const NODES_FILE = path.join(DATA_DIR, "nodes.json");

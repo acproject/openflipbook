@@ -76,5 +76,18 @@
     "aspect_ratio": "16:9",
     "final_prompt": "",
     "created_at": "2026-04-24T11:15:38.169Z"
+  },
+  {
+    "id": "71e84bcc-8abd-4a14-b060-902a80857bbe",
+    "parent_id": null,
+    "session_id": "session_382f9f56-a5cf-485a-a77b-58f2d5629c6d",
+    "query": "Uploaded image",
+    "page_title": "Uploaded image",
+    "image_key": "session_382f9f56-a5cf-485a-a77b-58f2d5629c6d/257847bc-92cd-4f59-9f06-47f3a1ac14e3.png",
+    "image_model": "user-upload",
+    "prompt_author_model": "user-upload",
+    "aspect_ratio": "16:9",
+    "final_prompt": "",
+    "created_at": "2026-04-24T11:25:34.432Z"
   }
 ]
